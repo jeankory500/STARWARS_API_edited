@@ -13,7 +13,7 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
+            "email": self.email
             # do not serialize the password, its a security breach
         }
 
@@ -21,7 +21,16 @@ class Fav(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     people_id = db.relationship("People")
-    planets_id = db.relationship("Planets")
+    planet_id = db.relationship("Planets")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "people_id": self.email,
+            "planet_id": self.planet_id
+            # do not serialize the password, its a security breach
+        }
 
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,3 +67,7 @@ class Planets(db.Model):
             "planets_fav": self.planets_fav
             # do not serialize the password, its a security breach
         }
+    
+    # \dl
+    # \l[+]
+    
